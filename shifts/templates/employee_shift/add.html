@@ -1,0 +1,87 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title%}Create employee shift{% endblock %}
+{% block style%}
+<link href="{% static 'vendor_static/css/plugins/colorpicker/bootstrap-colorpicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor_static/css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+{% endblock style%}
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" style="margin-bottom:20px">
+
+        <div style="margin-left: 10px;">
+            <h2>Create employee shift</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'shifts:employee_shift_list' %}">Employee Shift</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Add employee shift</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate autocomplete='off'>
+                    {% csrf_token %}
+
+                    <div class="ml-3">
+                        <div class="col">
+                            {{form|crispy}}
+
+                        </div>
+
+                        <br />
+
+                        <br />
+                        <div class="form-group  row" style="margin-left: 10px;">
+                            <input type="submit" class="btn btn-primary " name="submit" value="submit">
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script%}
+<!-- Color picker -->
+<script src="{% static 'vendor_static/js/plugins/colorpicker/bootstrap-colorpicker.min.js' %}"></script>
+<!-- Clock picker -->
+<script src="{% static 'vendor_static/js/plugins/clockpicker/clockpicker.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $(".select2_demo_1").select2();
+    });
+
+    $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2012",
+      // You can put more options here.
+
+    });
+  });
+
+
+
+
+</script>
+
+{% endblock script %}

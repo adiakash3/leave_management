@@ -1,0 +1,55 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+{% load reports %}
+{% load crispy_forms_tags %}
+
+{% block title%}Leave carry{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="ibox ">
+
+            <div class="ibox-title">
+                <div class="ml-2">
+                    <h2>Leave details</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'dashboard:home' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'reports:employees_leave_report' %}">Leave report</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Leave carry addtion</strong>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <form action="" method="POST" class=" col-md-8">
+                    {% csrf_token %}
+                    {{form|crispy}}
+
+                    <input type="submit" class="btn btn-primary" value="Add or Update">
+                </form>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script%}
+
+{% endblock script %}

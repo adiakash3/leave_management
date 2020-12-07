@@ -1,0 +1,66 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title%}Department edit{% endblock %}
+{% block style%}
+<style>
+    h2 {
+        font-size: 20px;
+    }
+</style>
+
+
+{% endblock style%}
+
+
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" style="margin-bottom:20px">
+
+        <div>
+            <h2>Edit Department</h2>
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'departments:department_list' %}">Department</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Department edit</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div >
+                        <div class="col">
+                            {{department_form|crispy}}
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group  row" style="margin-left: 10px;">
+                            <input type="submit" class="btn btn-primary " name="submit" value="submit">
+                            <a href="{% url 'employees:employee_list' %}" class="btn btn-danger"
+                                style="margin-left:10px"><b>Cancel</b></a>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

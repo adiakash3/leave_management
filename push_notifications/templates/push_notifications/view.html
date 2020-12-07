@@ -1,0 +1,49 @@
+{% extends 'layout/base.html' %}
+
+{% block title%}Push Notification settings{% endblock %}
+
+{% block style%}
+<!--write here css-->
+<style>
+    .title {
+        color: #2679bf;
+    }
+</style>
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Push notifications settings</h3>
+                <span class="pull-right">
+                    <a href="{% url 'push_notifications:push_notification_add' %}" class="btn btn-primary"><i class="fa fa-edit"></i> Add/Edit</a>
+                </span>
+            </div>
+            <div class="ibox-content">
+                    <div>
+                        <h5><b>Fcm API key</b></h5>
+                        <p>
+                            {% if fcm_setting.api_key %}
+                                {{fcm_setting.api_key}}
+                            {% else %}
+                                No FCM Api key available
+                            {% endif %}
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script%}
+
+{% endblock %}

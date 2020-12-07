@@ -1,0 +1,62 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Department details{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Department details</h3>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'departments:department_list' %}">Department</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Department details</strong>
+                </li>
+            </ol>
+            </div>
+
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <h5><b>Department Name</b></h5>
+                            <p>{{department.name|title}}</p>
+                        </div>
+                        <div>
+                            <h5><b>Organisation Name</b></h5>
+                            <p>{{department.organisation.name|title}}</p>
+                        </div>
+                        <div>
+                            <h5><b>Added On</b></h5>
+                            <p>{{department.created_at|date:"d/m/Y"}}</p>
+                        </div>
+
+
+
+                    </div>
+                        
+                    </div>
+                </div>
+                <hr>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

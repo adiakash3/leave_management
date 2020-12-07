@@ -1,0 +1,61 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Financial year leave details{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="ibox ">
+            <div class="ibox-title">
+
+
+            <div style="margin-left: 10px;">
+            <h2>Financial year leave detail</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a>Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a>Financial Year Leave</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Financial Year Leave Detail</strong>
+                </li>
+            </ol>
+
+        </div></div>
+        <hr size="30">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h5><b>Financial Year</b></h5>
+                            <p>{{fyl_obj.financial_year.start_date|date:'m/d/Y'}} - {{fyl_obj.financial_year.end_date|date:'m/d/Y'}}</p>
+                        </div>
+                         <div>
+                            <h5><b>Max Leave Carry</b></h5>
+                            <p>{{fyl_obj.max_leave_carry}}</p>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

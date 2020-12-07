@@ -1,0 +1,87 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title%}Add Financial year{% endblock %}
+{% block style%}
+<style>
+
+</style>
+
+
+{% endblock style%}
+
+
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" >
+
+        <div >
+            <h2>Create Financial year</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                     <a href="{% url 'leaves:financial_year_list' %}">Financial Year list</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Add Financial year</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate autocomplete="off">
+                    {% csrf_token %}
+
+                    <div >
+                        <div class="col">
+                            {{financial_year_form|crispy}}
+
+                        </div>
+
+                        <br />
+
+                        <br />
+                        <div class="form-group  row" >
+                            <input type="submit" class="btn btn-primary submitbox1" name="submit" value="submit">
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script%}
+<script>
+    $(document).ready(function () {
+        $(".select2_demo_1").select2();
+    });
+
+    $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      autoclose: true,
+      yearRange: "1900:2012",
+      // You can put more options here.
+
+    });
+  });
+
+
+</script>
+
+{% endblock %}

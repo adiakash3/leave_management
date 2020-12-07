@@ -1,0 +1,56 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title%}Organisation edit{% endblock %}
+{% block style%}
+<style>
+</style>
+
+{% endblock style%}
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" >
+        <div style="margin-left;">
+            <h2>Edit Organisation</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'departments:organisation_list' %}">Organisation</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Organisation edit</strong>
+                </li>
+            </ol>
+        </div>
+
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div >
+                        <div class="col">
+                            {{organisation_form|crispy}}
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group  row submitbox" >
+                            <input type="submit" class="btn btn-primary " name="submit" value="submit">
+                            <a href="{% url 'departments:organisation_list' %}" class="btn btn-danger cancelgap"
+                                ><b>Cancel</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

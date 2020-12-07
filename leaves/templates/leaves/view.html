@@ -1,0 +1,156 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Leave details{% endblock %}
+
+{% block style%}
+<!--write here css-->
+<style>
+    .outline-primary {
+        border-radius: 30px;
+        padding: 5px;
+        border: 1px solid var(--primary);
+        color: var(--primary);
+    }
+</style>
+{% endblock style%}
+
+
+
+{% block content %}
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" style="margin-bottom:20px">
+        <div style="margin-left: 10px;">
+            <h2>View leave details</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'leaves:leaves_all_list' %}">Leaves</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Leave details</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="col-md-10">
+            <br>
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    Leave status :
+                    <span class="outline-primary ml-3">
+
+                    {{leave.leave.status|title}}
+                        
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    {% if leave.leave.status == 'applied' %}
+                    <form action="{% url 'leaves:leave_approve' leave.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <select name="choice" id="choice" style="margin: 0px 0px 6px;">
+                                <option value="select" hidden>select</option>
+                                <option value="approve" >Approve</option>
+                                <option value="reject" >Reject</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="comments" name="comments" rows="2" cols="30" placeholder="comment here"></textarea>
+<!--                            <input type="text" class="form-control" name="comments" placeholder="Add comment here">-->
+                        </div>
+                        <input type="submit" class="btn btn-success" value="Submit" >
+                    </form>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+            
+
+            <br>
+            <hr size="30">
+            <div>
+                Applied user : {{leave.applied_by}}
+            </div>
+            <br>
+            <div>
+                Leave type : {{leave.leave_type.name}}
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-4">
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    Date start : {{leave.start_date_at|date:"D, d M, Y"}}
+                </div>
+                <div class="col-4">
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    Date end : {{leave.end_date_at|date:"D, d M, Y"}}
+                </div>
+                <div class="col-4">
+                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                    Total in days : {{leave.total_days}}
+                </div>
+
+            </div>
+            <hr size="30">
+            <br>
+            <div>
+                Full day :
+
+                {% if leave.is_half_day %}
+                No
+                {% else %}
+                Yes
+                {% endif %}
+
+            </div>
+
+            <br>
+            <div> <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                Applied on :
+                {{leave.applied_on}}
+            </div>
+            <br>
+            <div>
+                Reason : {{leave.reason}}
+            </div>
+            <br>
+            <div>
+                Comments : {{leave.description}}
+            </div>
+
+            <hr size="30">
+            <h2 class="title">Default Reporter</h2>
+            <br>
+            <div>
+                <b>Approver</b> :
+                {{leave.leave.approver }}
+            </div>
+            <br>
+            <div>
+                Approver status :
+                <span class="outline-primary ml-3">
+                    {{leave.leave.get_status_display}}
+                </span>
+
+            </div>
+            <br>
+            <div>
+                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                Approver action : {{leave.leave.approver_action_at}}
+            </div>
+            <br>
+            <div>
+                Comments : {{leave.leave.comments|default_if_none:"No comments"}}
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

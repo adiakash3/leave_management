@@ -1,0 +1,55 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Break details{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Break details</h3>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'shifts:break_list' %}">Break</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>View break</strong>
+                </li>
+            </ol>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h5><b>Break name</b></h5>
+                            <p>{{breaks.name|title}}</p>
+                        </div>
+                        <div>
+                            <h5><b>Start time</b></h5>
+                            <p><i class="fa fa-clock-o mr-2"></i>{{breaks.start_time}}</p>
+                        </div>
+
+                        <div>
+                            <h5><b>End time</b></h5>
+                            <p><i class="fa fa-clock-o mr-2"></i>{{breaks.end_time}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html translate="no">
+
+{% load static %}
+
+<head>
+    <meta name="google" content="notranslate">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title%} Dashboard{% endblock %}</title>
+    {% block link%}
+    {% endblock link %}
+    <link href="{% static 'vendor_static/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor_static/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <!--    datatables css-->
+    <link href="{% static 'vendor_static/css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor_static/css/datepicker3.css' %}" rel="stylesheet">
+
+    <link href="{% static 'vendor_static/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor_static/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'styles.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+
+    {% block style %}
+    {% endblock style %}
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+
+
+        {% include 'layout/sidebar.html'%}
+
+        <div id="page-wrapper" class="gray-bg">
+            {% include 'layout/header.html'%}
+
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+
+            {% endfor %}
+            {% endif %}
+            {% block breadcrumb %}
+            
+            {% endblock breadcrumb %}
+
+
+            <div class="wrapper wrapper-content animated fadeInRight">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+
+            {% include 'layout/footer.html'%}
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'vendor_static/js/jquery-3.1.1.min.js' %}"></script>
+    <script type="text/javascript"
+        src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="{% static 'vendor_static/js/popper.min.js' %}"></script>
+    <script src="{% static 'vendor_static/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendor_static/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+    <script src="{% static 'vendor_static/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+
+    <!--datatables js plugins-->
+    <script src="{% static 'vendor_static/js/plugins/dataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'vendor_static/js/plugins/dataTables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{% static 'vendor_static/js/inspinia.js' %}"></script>
+    <script src="{% static 'vendor_static/js/plugins/pace/pace.min.js' %}"></script>
+
+    <!--date field-->
+    <script src="{% static 'vendor_static/js/bootstrap-datepicker.js' %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+    <script>
+        function imgError(image) {
+            image.onerror = "";
+            image.src = "{% static  'vendor_static/img/profile_small.png'%}";
+            return true;
+        }
+    </script>
+
+    {% block script %}
+    {% endblock script %}
+
+
+    <!-- ********************Start of web socket ******************************* -->
+    <script>
+        // Correctly decide between ws:// and wss://
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        let chatSocket = new WebSocket(ws_scheme + "://" + window.location.host + '/ws/notifications');
+
+        chatSocket.onopen = function () {
+            console.log('connected');
+        }
+
+        chatSocket.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            var message = data['message'];
+            console.log('websocket received the message => ', message);
+            // increment the count
+        };
+
+        chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly', e);
+        };
+
+
+    </script>
+    <!-- ************************ End of web socket*****************-->
+
+</body>
+
+</html>

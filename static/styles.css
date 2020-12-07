@@ -1,0 +1,9 @@
+#side_profile_photo {
+    width: 70px;
+    height: 70px;
+    background-color: #fff;
+}
+
+.table-bordered {
+    border: 1px solid #EBEBEB !important;
+}

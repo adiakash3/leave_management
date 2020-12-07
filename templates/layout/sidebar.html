@@ -1,0 +1,40 @@
+{% load static %}
+{% load has_role %}
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    {% if request.user.profile.image %}
+                    <img id="side_profile_photo" alt="image" class="img-circle" src="{{request.user.profile.image.url}}"
+                         onerror="imgError(this);" >
+                    {% else %}
+                    <img id="side_profile_photo" alt="image" class="img-circle" src="{% static  'checkmate/img/default1.png'%}"
+                         onerror="imgError(this);" >
+                    {% endif %}
+
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold">{{ request.user.first_name }} {{ request.user.last_name}}</span>
+                        <span class="text-muted text-xs block"><b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+                        <li><a  href="{% url 'accounts:profile'%}">Profile</a></li>
+                        <li><a  class="dropdown-item" href="/accounts/logout">Logout</a></li>
+
+                    </ul>
+
+                </div>
+            </li>
+            {% if request.user|has_role:'manager' %}
+                {% include "layout/sidebars/manager.html" %}
+            {% elif request.user|has_role:'team leader' %}
+                {% include "layout/sidebars/team_leader.html" %}
+            {% else %}
+                {% include "layout/sidebars/admin.html" %}
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>

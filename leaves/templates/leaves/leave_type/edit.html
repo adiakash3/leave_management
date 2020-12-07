@@ -1,0 +1,68 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+
+{% block title%}Edit Leave Type{% endblock %}
+{% block style%}
+<style>
+    h2 {
+        font-size: 20px;
+    }
+</style>
+
+
+{% endblock style%}
+
+
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" style="margin-bottom:20px">
+
+        <div style="margin-left: 10px;">
+            <h2>Edit Leave Type</h2>
+            <ol class="breadcrumb">
+                 <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'leaves:leave_type_list' %}">Leave Types</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Leave type edit</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <div style="margin-left: 10px;">
+                        <div class="col">
+                            {{leave_type_form|crispy}}
+
+                        </div>
+
+                        <br />
+
+                        <br />
+                        <div class="form-group  row" style="margin-left: 10px;">
+                            <input type="submit" class="btn btn-primary " name="submit" value="submit">
+                            
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+

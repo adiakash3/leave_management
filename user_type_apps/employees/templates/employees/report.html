@@ -1,0 +1,224 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+{% load reports %}
+{% block title%}Employee report{% endblock %}
+
+{% block style%}
+<link href="{% static 'vendor_static/css/plugins/daterangepicker/daterangepicker-bs3.css' %}" rel="stylesheet">
+
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="ibox ">
+
+            <div class="ibox-title">
+                <div style="margin-left: 10px;">
+                    <h2>{{employee.user.first_name|title}} {{employee.user.last_name}}</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'dashboard:home' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'employees:employee_list' %}">Employees</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Report</strong>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-4"><h3 class="">Daily Attendance</h3></div>
+                    <div class="form-group col-6">
+                        <form action="" method="GET" class="col-md-6">
+                            <div class="form-group" id="data_4">
+                                <div class="input-group date">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text" name="datepicker" id="datepicker"" class=" form-control"
+                                        value="{{current_date|date:'F, Y'}}">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5> Duration</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="ibox-tools"><span class="label label-success ">{{current_date|date:'F'}}</span></div>
+                                <h1>{{employee|my_duration_worked_for_given_month:current_date}}</h1>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5> Overtime</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="ibox-tools"><span class="label label-success ">{{current_date|date:'F'}}</span></div>
+                                <h1>{{employee|my_overtime_worked_for_given_month:current_date}}</h1>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Required</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="ibox-tools"><span class="label label-success ">{{current_date|date:'F'}}</span></div>
+                                <h1>{{employee|my_required_worked_for_given_month:current_date}}</h1>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="col-lg-3">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Producitivity</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="ibox-tools"><span class="label label-success ">{{current_date|date:'F'}}</span></div>
+                                <h1>{{employee|my_productive_hours_worked_for_given_month:current_date}}</h1>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Days worked</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="ibox-tools"><span class="label label-success ">{{current_date|date:'F'}}</span></div>
+                                <h1>{{employee|my_no_of_days_worked_for_given_month:current_date}}</h1>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+                <div class="table-responsive">
+                    {% comment %} <label for="filter" class="daterangepicker-label">Filter date wise</label>
+                    <input id="filter" type="text" name="daterange" value="01/01/2018 - 01/15/2018" /> {% endcomment %}
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Shift Name</th>
+                                <th>Shift start and end time</th>
+                                <th>In Time</th>
+                                <th>Out Time</th>
+                                <th>Duration</th>
+                                <th>Late By</th>
+                                <th>Early By</th>
+                                <th>Overtime</th>
+                                <th>Required</th>
+                                <th>Productivity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for employeeshift_map in employee_shift_mappings %}
+                            <tr class="gradeX">
+                                <td>
+                                    {{employeeshift_map.start_date|date:'d/m/Y'}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.shift.name}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.shift.start_time|date:'H:i:s'}} to
+                                    {{employeeshift_map.shift.end_time|date:'H:i:s'}}
+                                </td>
+
+                                <td>
+                                    {{employeeshift_map.employee_attendance.check_in|date:'H:i:s'}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.employee_attendance.check_out|date:'H:i:s'}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.employee_attendance.time_worked}}
+
+                                </td>
+                                <td>
+                                    {{employeeshift_map.late_by}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.early_by}}
+                                </td>
+                                <td>
+                                    {{employeeshift_map.employee|my_overtime_worked:employeeshift_map.start_date}}
+
+                                </td>
+                                <td>
+                                    {{employeeshift_map.employee|my_less_time_worked:employeeshift_map.start_date}}
+
+                                </td>
+                                <td>
+                                    {{employeeshift_map.productivity_hours}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script%}
+<script>
+    $(document).ready(function () {
+        $('.dataTables-example').DataTable({
+            pageLength: 10,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: []
+
+        });
+
+    });
+</script>
+<script src="{% static 'vendor_static/js/plugins/fullcalendar/moment.min.js' %}"></script>
+<script src="{% static 'vendor_static/js/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            format: "MM, yyyy",
+            startView: "months",
+            minViewMode: "months",
+            // endDate: new Date(new Date().getFullYear(), 11, 31)
+        }).change(dateChanged)
+            .on('changeDate', dateChanged);
+        function dateChanged(ev) {
+            console.log(ev)
+            $("form").submit();
+        }
+    });
+</script>
+
+{% endblock script %}

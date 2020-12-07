@@ -1,0 +1,111 @@
+<li>
+    <a href="{% url 'dashboard:home' %}"><i class="fa fa-pie-chart"></i> <span
+            class="nav-label">Dashboard</span> </a>
+</li>
+<li>
+    <a href="{% url 'employees:employee_list' %}"><i class="fa fa-users"></i> <span
+            class="nav-label">Employees</span> </a>
+</li>
+<li>
+    <a href="{% url 'team_leaders:team_leader_list' %}"><i class="fa fa-users"></i> <span
+            class="nav-label">Team leaders</span> </a>
+</li>
+<li>
+    <a href="{% url 'managers:manager_list' %}"><i class="fa fa-users"></i> <span
+            class="nav-label">Managers</span> </a>
+</li>
+<li class="nav-item">
+    <a href="{% url 'leaves:leaves_all_list' %}"><i class="fa fa-envelope-open-o"></i>
+        <span class="nav-label">Applied leaves</span></a>
+</li>
+<li class="nav-item">
+    <a href=""><i class="fa fa-bar-chart" aria-hidden="true"></i>
+        <span class="nav-label">Reports</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+         <li>
+            <a href="{% url 'reports:report_view' %}"><i class="fa fa-bar-chart"></i> <span
+                    class="nav-label">All Reports</span> </a>
+        </li>
+        <li>
+            <a href="{% url 'employees:employee_report_list' %}"><i class="fa fa-users"></i> <span
+                    class="nav-label">Employee List</span> </a>
+        </li>
+        <li class="nav-item">
+    <a href="{% url 'reports:employees_leave_report' %}"><i class="fa fa-history" aria-hidden="true"></i>
+        <span class="nav-label">Leave report</span></a>
+</li>
+    </ul>
+</li>
+<li class="nav-item">
+    <a href="{% url 'reports:shift_work_hours' %}"><i class="fa fa-bar-chart" aria-hidden="true"></i>
+        <span class="nav-label">Employees working hours</span></a>
+</li>
+
+<li>
+    <a href="#"><i class="fa fa-clock-o" aria-hidden="true"></i><span class="nav-label">Shift</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li>
+            <a href="{% url 'shifts:shift_list' %}"><i class="fa fa-exchange"></i> <span
+                    class="nav-label">Shifts</span> </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'shifts:employee_shift_list' %}"><i class="fa fa-exchange"></i>
+                <span class="nav-label"></span>Employee shift</a>
+        </li>
+    </ul>
+</li>
+
+<li class="nav-item">
+    <a href="{% url 'leaves:leave_add' %}"><i class="fa fa-envelope" aria-hidden="true"></i>
+        <span class="nav-label">Apply Leave</span></a>
+</li>
+<li>
+    <a href="#"><i class="fa fa-th" aria-hidden="true"></i><span class="nav-label">Master</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li>
+            <a href="{% url 'shifts:break_list' %}"><i class="fa fa-coffee"></i> <span
+                    class="nav-label">Breaks</span> </a>
+        </li>
+        <li>
+            <a href="{% url 'holidays:holiday_list' %}"><i class="fa fa-calendar"></i> <span
+                    class="nav-label">Holidays</span> </a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'leaves:leave_type_list' %}"><i class="fa fa-file-text-o"></i>
+                <span class="nav-label"></span>Leave types</a>
+        </li>
+         <li class="nav-item">
+            <a href="{% url 'departments:department_list' %}"><i class="fa fa-window-restore"></i>
+                <span class="nav-label"></span>Departments</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'departments:organisation_list' %}"><i class="fa fa-bank"></i>
+                <span class="nav-label"></span>Organisations</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'leaves:financial_year_list' %}"><i class="fa fa-calendar"></i>
+                <span class="nav-label"></span>Fiancial years</a>
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'emails:mail_list' %}"><i class="fa fa-envelope"></i>
+                <span class="nav-label"></span>Mails</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="{% url 'leaves:financial_year_leaves' %}"><i class="fa fa-gear"></i>
+                <span class="nav-label"></span>Financial year leave Configs</a>
+        </li>
+
+    </ul>
+</li>
+
+
+<li>
+    <a href="#"><i class="fa fa-wrench"></i> <span class="nav-label">Settings</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li class="active">
+            <a href="{% url 'push_notifications:push_notification_view' %}"><i class="fa fa-bullhorn"></i> <span
+                    class="nav-label"></span>Push notification</a>
+        </li>
+    </ul>
+</li>

@@ -1,0 +1,56 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Leave Type details{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Leave Type details</h3>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'leaves:leave_type_list' %}">Leave Types</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Leave type details</strong>
+                </li>
+            </ol>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div>
+                            <h5><b> Name</b></h5>
+                            <p>{{leave_obj.name|title}}</p>
+                        </div>
+                        <div>
+                            <h5><b> Leave Days </b></h5>
+                            <p>{{leave_obj.days}}</p>
+                        </div>
+
+
+                    </div>
+                        
+                    </div>
+                </div>
+                <hr>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

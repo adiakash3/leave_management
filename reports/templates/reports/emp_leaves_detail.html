@@ -1,0 +1,149 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+{% load reports %}
+{% load crispy_forms_tags %}
+
+{% block title%}Detail leave balance report{% endblock %}
+
+{% block style%}
+<link href="{% static 'vendor_static/css/plugins/daterangepicker/daterangepicker-bs3.css' %}" rel="stylesheet">
+ <style>
+     table.dataTable {
+        border: 1px solid;
+        border-color: #e5e1e1;
+     }
+ </style>
+{% endblock style%}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="ibox ">
+
+            <div class="ibox-title">
+                <div class="ml-2">
+                    <h2>Leave details</h2>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'dashboard:home' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a>{{employee.user.first_name|title}} {{employee.user.last_name}}</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            <strong>Leave balance detail</strong>
+                        </li>
+                    </ol>
+
+                </div>
+            </div>
+
+            <div class="ibox-content">
+                <form action="" method="GET" class=" col-md-4">
+                    {{form|crispy}}
+                </form>
+                
+               
+                <br>
+                <div class="row  m-0 ">
+                    <!--leave types iteration-->
+                    <table class="table table-light dataTables-example">
+                        <tr> <th>Leaves type </th> <th> Carried </th> <th> Taken </th> <th> Total taken </th> <th> Manage </th> </tr>
+                      
+                        {% for leave_type in leave_types %}
+                        <tr> 
+                            <td>{{leave_type.name}} </td>
+                            <td>{% my_carry_leave_count_based_on_leave_type employee current_fy.leave_config leave_type %}</td>
+                            <td>{% my_leave_count_based_on_type employee start_date end_date leave_type %}</td> 
+                            {% my_carry_leave_count_based_on_leave_type employee current_fy.leave_config leave_type as carry_count %}
+                            <td>{% my_leave_count_based_on_type employee start_date end_date leave_type %} / {{leave_type.days|add:carry_count}} </td> 
+                            <td> <a href="{% url 'reports:update_leave_carry_cout' employee.id leave_type.id  current_fy.leave_config.id %}" class="btn btn-primary">Edit</a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                  
+                
+
+                </div>
+                <hr>
+                <div class="row  m-0 ">
+                    <div  class="col-sm-3">
+                        <div  class="widget navy-bg p-lg ">
+                          <div  class="m-b-md text-center"> 
+                            <h2  class="font-bold no-margins">Unauthorized leaves</h2>
+                            </div>
+                            <div  class="m-b-md text-center">
+                                <em  class="fa fa-calendar-o fa-4x"></em>
+                            </div>
+                            <div  class="row">
+                              <div  class="col-sm-8"><h3 >Taken</h3></div>
+                              <div  class="col-sm-4"><h3 >{% my_unauthorized_leave employee start_date end_date  %}</h3></div>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+
+                    
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script%}
+<script>
+    $(document).ready(function () {
+        $('.dataTables-example').DataTable({
+            pageLength: 10,
+            responsive: true,
+            dom: '<"html5buttons"B>',
+            buttons: []
+
+        });
+
+    });
+</script>
+<script src="{% static 'vendor_static/js/plugins/fullcalendar/moment.min.js' %}"></script>
+<script src="{% static 'vendor_static/js/plugins/daterangepicker/daterangepicker.js' %}"></script>
+<script>
+    $(function () {
+        var start = moment('{{start_date}}');
+        var end = moment('{{end_date}}');
+
+        $('input[name="daterange"]').daterangepicker({
+            startDate: start,
+            endDate: end,
+            opens: 'right',
+            maxDate: moment(),
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'This year': [moment().startOf('year'),  moment().endOf('month')]
+            }
+        }, function (start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            $("form").submit();
+        });
+    });
+</script>
+
+<script>
+    $('#filter').val(moment('{{start_date}}').format('MM/DD/YYYY') + ' - ' + moment('{{end_date}}').format('MM/DD/YYYY'))
+</script>
+<script>
+    $("#id_year").change(function () {
+        this.form.submit();
+    });
+</script>
+{% endblock script %}

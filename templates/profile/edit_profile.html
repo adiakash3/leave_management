@@ -1,0 +1,191 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Edit profile{% endblock %}
+{% load static %}
+
+{% block style %}
+<style>
+.profile_photo_holder {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: #FFFFFF;
+    box-shadow: 0 0 8px 3px #B8B8B8;
+    position: relative;
+}
+.main_profile_image {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+.dummy_profile_image {
+    border - radius: 50 %;
+    max-width: 240px;
+    max-height: 228px;
+}
+
+.profile_photo_holder i {
+    position: absolute;
+    top: 20px;
+    right: -7px;
+    /* border: 1px solid; */
+    border-radius: 50%;
+    /* padding: 11px; */
+    height: 30px;
+    width: 30px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: cornflowerblue;
+    box-shadow: 0 0 8px 3px #B8B8B8;
+}
+#imgbutton{
+margin-right: 25px ;
+margin-top: 40px;
+}
+#imgInp {
+    display: none;
+}
+</style>
+{% endblock style %}
+
+{% block script %}
+<script>
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+
+reader.onload = function (e) {
+$('#profile_image').attr('src', e.target.result);
+}
+
+reader.readAsDataURL(input.files[0]);
+}
+}
+$('.profile_image_edit_icon').click(function () {
+$('#imgInp').click()
+})
+$('.dummy_profile_image').click(function () {
+$('#imgInp').click()
+})
+$("#imgInp").change(function () {
+readURL(this);
+});
+
+function myPincode(){
+    var str = document.getElementById("pincode").value;
+    var pincodeAlert=document.getElementById("pincode-alert");
+    if(!((/^[0-9]{6,10}$/.test(str)))){
+       pincodeAlert.innerHTML="pincode must be number";
+       }
+}
+
+</script>
+{% endblock %}
+
+{% block content %}
+<!--write main content here-->
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                        </div>
+                    </div>
+                    <div style="text-align:center">
+                        <h3><strong>edit profile</strong></h3>
+                    </div>
+                </div>
+                <form [formGroup]="editProfileForm" action="." method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        <div class="ibox-content text-center">
+                            {% if edit_profile.profile.image %}
+                            <div class="profile_photo_holder m-auto">
+                                <img id="profile_image"  alt="image" class="img-fluid main_profile_image"
+                                     src="{{edit_profile.profile.image.url}}">
+                                <i class="fa fa-edit profile_image_edit_icon pointer"></i>
+                            </div>
+                            {% else %}
+                            <div class="profile_photo_holder m-auto">
+                                <img id="profile_image" alt="image" class="img-fluid main_profile_image dummy_profile_image pointer"
+                                     src="{% static  'checkmate/img/default.png'%}">
+                                <i class="fa fa-edit profile_image_edit_icon pointer"></i>
+                            </div>
+                            {% endif %}
+                            <div>
+                                <input type='file' name="profile_image" id="imgInp" accept="image/*" />
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="ibox-content ">
+                            <div class="#">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>First Name:</p>
+                                        <input type="text" class="form-control" placeholder="Enter first name"
+                                               name="first_name" value="{{edit_profile.first_name}}">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>Last Name:</p>
+                                        <input type="text" class="form-control" placeholder=""
+                                               name="last_name" value="{{edit_profile.last_name}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>Registered email address:</p>
+                                        <input type="text" class="form-control" placeholder="Enter email" name="email"
+                                               value="{{edit_profile.email}}" formControlName="email">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>Registered mobile number:</p>
+                                        <input type="text" class="form-control" placeholder="Enter mobile number"
+                                               name="mobile_number" value="{{edit_profile.mobile_number}}">
+                                    </div>
+                                </div>
+                                <br>
+                                <h3><b>Update Address</b></h3>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p>Street Address:</p>
+                                        <input type="text" class="form-control"
+                                               placeholder="Enter office street address" name="address"
+                                               value="{{ profile_address }}" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p>Pincode:</p>
+                                        <input id="pincode" type="text" class="form-control" name="pincode" placeholder="Enter office pincode"
+                                               pattern="[0-9]{1,10}" maxlength="10" value="{{ profile_pin }}" required onkeyup="myPincode();">
+                                        <p style="color:red" id="pincode-alert">&nbsp;</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p >City:</p>
+                                        <input type="text" class="form-control" placeholder="City"
+                                               name="city" value="{{ profile_city }}" required>
+                                    </div>
+                                    <br>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12" style="text-align:right;">
+                                            <button type= "submit" id="imgbutton" class="btn btn-primary ">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

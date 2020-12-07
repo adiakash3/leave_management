@@ -1,0 +1,201 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+{% block style %}
+
+{% endblock style %}
+
+{% block breadcrumb %}
+<h2>Dashboard</h2>
+<ol class="breadcrumb ">
+    <li class="breadcrumb-item active">
+        <strong>Home</strong>
+    </li>
+</ol>
+{% endblock breadcrumb %}
+
+{% block content %}
+
+<div class="row">
+    <h1>Welcome to Employee Management</h1>
+</div>
+<p>
+</p>
+<div class="wrapper wrapper-content">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Today</span></div>
+                    <a href="{% url 'leaves:approved_leave_today' %}"><h1>{{total_leave_today}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Week</span></div>
+                    <a href="{% url 'leaves:approved_leave_week' %}"><h1>{{total_leave_week}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Month</span></div>
+                    <a href="{% url 'leaves:approved_leave_month' %}"><h1>{{total_leave_month}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Unauthorized leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Today</span></div>
+                    <a href="{% url 'leaves:unauthorized_leave_today' %}"><h1>{{total_unauthorized_leave_today}}</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Unauthorized leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Week</span></div>
+                    <a href="{% url 'leaves:unauthorized_leave_week' %}"><h1>{{total_unauthorized_leave_week}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Unauthorized leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Month</span></div>
+                    <a href="{% url 'leaves:unauthorized_leave_month' %}"><h1>{{total_unauthorized_leave_month}}</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total Pending leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Today</span></div>
+                    <a href="{% url 'leaves:pending_leave_today' %}"><h1>{{total_pending_leave_today}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total Pending leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Week</span></div>
+                    <a href="{% url 'leaves:pending_leave_week' %}"><h1>{{total_pending_leave_week}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total Pending leave</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Month</span></div>
+                    <a href="{% url 'leaves:pending_leave_month' %}"><h1>{{total_pending_leave_month}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Shift</span></div>
+                    <a href="{% url 'shifts:shift_list' %}"><h1>{{total_shift}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Manager</span></div>
+                    <a href="{% url 'managers:manager_list' %}"><h1>{{total_manager}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Team Leader</span></div>
+                    <a href="{% url 'team_leaders:team_leader_list' %}"><h1>{{ total_teamleader}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5> Total </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-tools"><span class="label label-success ">Departments</span></div>
+                    <a href="{% url 'departments:department_list' %}"><h1>{{ total_departments}}</h1></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+{% endblock %}

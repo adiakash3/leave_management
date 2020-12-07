@@ -1,0 +1,99 @@
+{% extends 'layout/base.html'%}
+
+{% block title%}Shift details{% endblock %}
+
+{% block style%}
+
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Shift details</h3>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'shifts:shift_list' %}">Shift</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>view details</strong>
+                </li>
+            </ol>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div>
+                            <h5><b>Shift name</b></h5>
+                            <p>{{shift.name|title}}</p>
+                        </div>
+                        <div>
+                            <h5><b>Shift Code</b></h5>
+                            <p>{{shift.code}}</p>
+                        </div>
+                        <div>
+                            <h5><b>Start time</b></h5>
+                            <p><i class="fa fa-clock-o mr-2"></i>{{shift.start_time}}</p>
+                        </div>
+
+                        <div>
+                            <h5><b>End time</b></h5>
+                            <p><i class="fa fa-clock-o mr-2"></i>{{shift.end_time}}</p>
+                        </div>
+                        <p><b>Breaks list</b></p>
+                        <div class="row">
+                            
+                            <div class="col-3">
+                                SL No.
+                            </div>
+                            <div class="col-3">
+                                Name
+                            </div>
+                            <div class="col-3">
+                                Start time
+                            </div>
+                            <div class="col-3">
+                                End time
+                            </div>
+                        </div>
+                        <hr>
+                        {% for break in shift.breaks.all %}
+                        <div class="row">
+                            <div class="col-3">
+                                {{forloop.counter}}
+                            </div>
+                            <div class="col-3">
+                                {{break.name}}
+                            </div>
+                            <div class="col-3">
+                                {{break.start_time}}
+                            </div>
+                            <div class="col-3">
+                                {{break.end_time}}
+                            </div>
+                        </div>
+                        <hr>
+                        {% empty %}
+                            <p>No breaks included.</p>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

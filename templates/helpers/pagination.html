@@ -1,0 +1,47 @@
+{% if queryset.has_other_pages %}
+<div style="margin-left:13px;">
+
+    <b style="margin-left: 6px;">Page</b> <span><b>{{ queryset.number }}</b></span> <b>of</b>
+    <span> <b>{{ end_index}}</b></span>
+
+</div>
+<div class="text-center">
+    <ul class="pagination pagination-lg text-center" style="margin-left: 19px;">
+
+        {% if queryset.has_previous %}
+            
+            <li><a href="?page={{ queryset.previous_page_number }}&{{ parameters }}">&laquo;</a></li>
+         
+            
+        {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+
+        {% if start_index %}
+        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+        <li class="disabled"><span>&mldr;</span></li>
+        {% endif %}
+
+        {% for i in page_range %}
+            {% if queryset.number == i %}
+            <li class="active" style=""><span style="border-color:#252a2d;font-weight:900">{{ i }} <span
+                        class="sr-only">(current)</span></span></li>
+            {% else %}
+    
+                <li><a href="?page={{ i }}&{{ parameters }}">{{ i }}</a></li>
+
+            {% endif %}
+        {% endfor %}
+
+
+        {% if queryset.has_next %}
+            
+                <li><a href="?page={{ queryset.next_page_number }}&{{ parameters }} ">&raquo;</a></li>
+            
+            
+        {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+</div>
+{% endif %}

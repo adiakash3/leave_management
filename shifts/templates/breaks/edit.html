@@ -1,0 +1,80 @@
+{% extends 'layout/base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title%}Edit break{% endblock %}
+{% block style%}
+<link href="{% static 'vendor_static/css/plugins/colorpicker/bootstrap-colorpicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor_static/css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+{% endblock style%}
+
+
+{% block content %}
+
+<div class="row" style="background-color: white">
+    <div class="col-lg-12" style="margin-bottom:20px">
+
+        <div style="margin-left: 10px;">
+            <h2>Edit break</h2>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'dashboard:home' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'shifts:break_list' %}">Break</a>
+                </li>
+                <li class="breadcrumb-item active">
+                    <strong>Edit break</strong>
+                </li>
+            </ol>
+
+        </div>
+        <hr size="30">
+        <div class="row">
+            <div class="col-md-5">
+                <form method="post" novalidate autocomplete='off'>
+                    {% csrf_token %}
+
+                    <div style="margin-left: 10px;">
+                        <div class="col">
+                            {{form|crispy}}
+
+                        </div>
+
+                        <br />
+
+                        <br />
+                        <div class="form-group  row" style="margin-left: 10px;">
+                            <input type="submit" class="btn btn-primary " name="submit" value="Update">
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block script%}
+<!-- Color picker -->
+<script src="{% static 'vendor_static/js/plugins/colorpicker/bootstrap-colorpicker.min.js' %}"></script>
+<!-- Clock picker -->
+<script src="{% static 'vendor_static/js/plugins/clockpicker/clockpicker.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $("#id_breaks").select2({
+            placeholder: 'Choose breaks'
+        });
+    });
+    $('.clockpicker').clockpicker({
+        'donetext':'ok',
+        autoclose: true
+    });
+
+</script>
+
+{% endblock script %}

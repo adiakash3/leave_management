@@ -1,0 +1,117 @@
+{% extends 'layout/base.html'%}
+{% load static %}
+
+{% block title%}Profile detail{% endblock %}
+
+{% block style%}
+<style>
+#profile_image {
+    border-radius: 50%;
+    width: 240px;
+    height: 228px;
+}
+</style>
+{% endblock style %}
+
+{% block script %}
+{% endblock %}
+
+{% block content %}
+<!--write main content here-->
+
+<div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <div class="col-md-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-sm-8">
+                        </div>
+                        <div class="col-sm-4">
+<!--                            <a href="{% url 'accounts:edit_base_profile'%}" class="btn btn-primary btn-xs"-->
+<!--                                style="margin-left: 200px">Edit-->
+<!--                            </a>-->
+                        </div>
+
+                    </div>
+                    <div style="text-align:center">
+                        <h3><strong>Profile Details</strong></h3>
+                    </div>
+                </div>
+                <div>
+                    <div class="ibox-content no-padding text-center">
+
+                        {% if profile_photo.image %}
+                            <img id="profile_image" alt="image" class="img-fluid  m-3" src="{{profile_photo.image.url}}">
+                        {% else %}
+                            <img id="profile_image" alt="image" class="img-fluid  m-3" src="{% static  'vendor_static/img/default1.png'%}">
+                        {% endif %}
+                    </div>
+                    <div class="ibox-content profile-content">
+
+                        <div class="user-button">
+
+                            <div class="row">
+
+                                <div class="col-sm-3">
+                                    <p>First Name:</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p><strong>{{first_name}}</strong></p>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p>Last Name:</p>
+                                </div>
+                                <div class="col-sm-3"><strong>{{last_name}}</strong></div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-sm-3">
+                                    <p>Registered email address:</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p><strong>{{email}}</strong></p>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <p>Registered mobile number:</p>
+                                </div>
+                                <div class="col-sm-3"><strong>{{mobile_number}}</strong></div>
+                                <div class="col-sm-3">
+
+                                </div>
+
+                            </div>
+                        </div>
+                         <br>
+                            <h3><u>Address</u></h3>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p>Street Address:</p>
+                                </div>
+                                <div class="col-sm-3"><strong>{{profile_address}}</strong></div>
+                                <div class="col-sm-3">
+                                    <p>City:</p>
+                                </div>
+                                <div class="col-sm-3"><strong>{{profile_city}}</strong></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p>Pincode:</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <p><strong>{{profile_pin}}</strong></p>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

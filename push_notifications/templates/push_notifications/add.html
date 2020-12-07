@@ -1,0 +1,45 @@
+{% extends 'layout/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title%}Push Notification settings{% endblock %}
+
+{% block style%}
+<!--write here css-->
+<style>
+    .title {
+        color: #2679bf;
+    }
+</style>
+{% endblock style%}
+
+
+
+{% block content %}
+<!--write main content here-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h3>Push notifications settings</h3>
+            </div>
+            <div class="ibox-content">
+                <div class="">
+                    <form  method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{fcm_setting_form|crispy}}
+                        <input type="submit" class="btn btn-primary m-1 shadow" value="Submit"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script%}
+
+{% endblock %}
